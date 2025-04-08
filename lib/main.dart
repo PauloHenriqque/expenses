@@ -13,8 +13,7 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
-  final _transactions  = [
+  final _transactions = [
     Transaction(
       id: 't1',
       title: 'Novo tênis de corrida',
@@ -28,33 +27,65 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
-   MyHomePage({super.key});
+  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Despesas Pessoais'),
-      ),
+      appBar: AppBar(title: const Text('Despesas Pessoais')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Card(
-            child: Text('Gráfico'),
-            color: Colors.blue,
-            elevation: 5,
-          ),
+          Card(child: Text('Gráfico'), color: Colors.blue, elevation: 5),
           Column(
-            children: _transactions.map((tr) {
-              return Card(
-                child: Text(tr.title),
-              );
-            }).toList(),
-          )
+            children:
+                _transactions.map((tr) {
+                  return Card(
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 15,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.purple, width: 2),
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            'R\$ ${tr.value.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.purple,
+                            ),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              tr.title, 
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              ), Text(
+                                tr.date.toString(),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ), 
+                            ],
+                          ),
+                        ],
+                    ),
+                  );
+                }).toList(),
+          ),
         ],
-      )
-
+      ),
     );
   }
 }
