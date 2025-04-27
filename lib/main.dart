@@ -13,13 +13,15 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
   MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Despesas Pessoais')),
+      appBar: AppBar(
+        title: const Text('Despesas Pessoais'),
+        actions: <Widget>[IconButton(icon: Icon(Icons.add), onPressed: () {})],
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,6 +31,10 @@ class MyHomePage extends StatelessWidget {
             TransactionUser(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }
